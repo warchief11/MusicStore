@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MusicStore.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,13 @@ namespace MusicStore
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            UnityConfig.RegisterComponents();
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicStoreContext, Migrations.Configuration>());
+            using (var context = new MusicStoreContext())
+            {
+                context.Database.Initialize(true);
+            }
+            //Database.SetInitializer<MusicStore.Models.MusicStoreContext>(InitialCreate);
         }
     }
 }
