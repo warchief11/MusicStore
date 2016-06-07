@@ -29,6 +29,12 @@
                 <ul class="nav navbar-nav">
                     <li class="first">@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Store", "Index", "Store")</li>
+                    <li>
+                        <a href="~/ShoppingCart">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <span>@ViewBag.CartCount</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -38,6 +44,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <small>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "Admin" } , null)</small>
         </footer>
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>

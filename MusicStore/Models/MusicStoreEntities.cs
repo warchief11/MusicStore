@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace MusicStore.Models
 {
@@ -11,6 +7,9 @@ namespace MusicStore.Models
         public DbSet<Album> Albums { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Artist> Artists { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }

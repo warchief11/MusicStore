@@ -1,0 +1,48 @@
+﻿@model MusicStore.ViewModels.ShoppingCartViewModel
+
+<h2>Shopping Cart</h2>
+
+<div class="container">
+    <div class="row" role="rowheader">
+        <div class="col-sm-6">
+            <h5>Item</h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>Price</h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>Quantity</h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>Remove</h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>Total</h5>
+        </div>
+    </div>
+    <div class="row" role="rowgroup">
+        @foreach (var item in Model.CartItems)
+        {
+            <div class="col-sm-6">
+                @Html.ActionLink(item.Album.Title, "Details", "Store", new { albumId = item.AlbumId }, null);
+                @*<img src=@item.Album.AlbumArtUrl/>*@
+            </div>
+            <div class="col-sm-1">
+                <text>@item.Album.Price</text>
+            </div>
+            <div class="col-sm-1">
+                <text>@item.Count</text>
+            </div>
+            <div class="col-sm-1 btn">
+                @Html.ActionLink("Remove", "RemoveFromCart", "ShoppingCart", new { cartItemId = item.CartItemId}, null);
+            </div>
+            <div class="col-sm-1">
+                <text>@(item.Album.Price * item.Count)</text>
+            </div>
+        }
+    </div>
+    <div class="row" role="separator"/>
+    <div class="panel-footer pull-right">
+       <text>@Model.Total</text>
+    </div>
+</div>
