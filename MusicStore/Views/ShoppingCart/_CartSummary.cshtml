@@ -1,0 +1,5 @@
+﻿@model  MusicStore.ViewModels.ShoppingCartViewModel
+
+<a href=@Url.Action("Index", "ShoppingCart")>
+    <text class="glyphicon glyphicon-shopping-cart">(@Model.CartItems.Count())</text>
+</a>

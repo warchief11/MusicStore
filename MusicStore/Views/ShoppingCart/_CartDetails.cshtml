@@ -1,0 +1,38 @@
+﻿@model  MusicStore.ViewModels.ShoppingCartViewModel
+
+<div>
+
+    <table class="table table-bordered table-responsive table-hover table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Total</th>
+        </tr>
+
+        @foreach (MusicStore.Models.CartItem cartItem in Model.CartItems)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(cartItem.Album.Title, "Details", "Store", new { albumId = cartItem.AlbumId }, null)
+                </td>
+                <td>
+                    <span data-format="C">@cartItem.Album.Price</span>
+                </td>
+                <td>
+                    @cartItem.Count
+                </td>
+                <td>
+                    @Ajax.ActionLink("Remove Item", "RemoveFromCart", "ShoppingCart", new { cartItemID = cartItem.CartItemId }, new AjaxOptions { UpdateTargetId = "cart-summary", InsertionMode = InsertionMode.Replace })
+                </td>
+                <td>
+                    @(cartItem.Album.Price * cartItem.Count)
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="grid-footer">
+        Subtotal: <span data-format="c">@Model.Total</span>
+    </div>
+</div>

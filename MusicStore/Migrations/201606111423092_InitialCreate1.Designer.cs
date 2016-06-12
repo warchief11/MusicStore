@@ -13,7 +13,7 @@ namespace MusicStore.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201606051337562_InitialCreate1"; }
+            get { return "201606111423092_InitialCreate1"; }
         }
         
         string IMigrationMetadata.Source

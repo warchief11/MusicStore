@@ -10,7 +10,5 @@ namespace MusicStore.Models
 
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

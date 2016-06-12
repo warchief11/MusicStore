@@ -1,9 +1,27 @@
-﻿
+﻿@model  IEnumerable<MusicStore.Models.Album>
 @{ 
     ViewBag.Title = "Home";
 }
-<div>This is the home page</div>
-<div>
-    <img src="~/Content/Images/home-showcase.png" />
+<div class="container">
+    <div>This is the home page</div>
+    <div>
+        <img src="~/Content/Images/home-showcase.png" />
+    </div>
+    <div>
+        <ul class="row list-unstyled media-list">
+            @foreach (var album in Model)
+            {
+                <li class="col-lg-2 col-md-2 col-sm-2 col-xs-4 container">
+                    <a href="~/Store/Details?albumID=@album.AlbumId">
+                        <span>
+                            <img alt=@album.Title src=@album.AlbumArtUrl />
+                        </span>
+                        <h4>@album.Title</h4>
+                    </a>
+                    @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
+                </li>
+            }
+        </ul>
+    </div>
 </div>
 

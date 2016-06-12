@@ -77,12 +77,12 @@ namespace MusicStore.Models
             _dbContext.CartItems.RemoveRange(cartItems);
         }
 
-        public Task<List<CartItem>> GetCartItems()
+        public List<CartItem> GetCartItems()
         {
             return _dbContext.CartItems.
                 Where(cart => cart.CartId == _shoppingCartId).
                 Include(c => c.Album).
-                ToListAsync();
+                ToList();
         }
 
         public Task<int> GetCount()
@@ -95,23 +95,31 @@ namespace MusicStore.Models
                 .SumAsync();
         }
 
-        public Task<decimal> GetTotal()
+        public decimal GetTotal()
         {
-            // Multiply album price by count of that album to get 
+            // Multiply album price by count of that album to get
             // the current price for each of those albums in the cart
             // sum all album price totals to get the cart total
-            return _dbContext.CartItems
-                .Include(c => c.Album)
-                .Where(c => c.CartId == _shoppingCartId)
-                .Select(c => c.Album.Price * c.Count)
-                .SumAsync();
+            var items = _dbContext.CartItems
+                                        .Include(c => c.Album)
+                                        .Where(c => c.CartId == _shoppingCartId)
+                                        .Select(c => c.Count * c.Album.Price)
+                                        .ToList();
+            if (items.Count > 0)
+            {
+                return items.Sum();
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public async Task<int> CreateOrder(Order order)
         {
             decimal orderTotal = 0;
 
-            var cartItems = await GetCartItems();
+            var cartItems = GetCartItems();
 
             // Iterate over the items in the cart, adding the order details for each
             foreach (var item in cartItems)

@@ -8,17 +8,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MusicStore.Models;
+using MusicStore.Core;
 
 namespace MusicStore.Areas.Admin.Controllers
 {
-    public class StoreManagerController : Controller
+    public class StoreManagerController : BaseController
     {
-        private MusicStoreContext db = new MusicStoreContext();
-
         // GET: StoreManager
         public async Task<ActionResult> Index()
         {
-            var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            var albums = _dbContext.Albums.Include(a => a.Artist).Include(a => a.Genre);
             return View(await albums.ToListAsync());
         }
 
@@ -29,7 +28,7 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await db.Albums.FindAsync(id);
+            Album album = await _dbContext.Albums.FindAsync(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -40,8 +39,8 @@ namespace MusicStore.Areas.Admin.Controllers
         // GET: StoreManager/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name");
+            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name");
             return View();
         }
 
@@ -54,13 +53,13 @@ namespace MusicStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
-                await db.SaveChangesAsync();
+                _dbContext.Albums.Add(album);
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -71,13 +70,13 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await db.Albums.FindAsync(id);
+            Album album = await _dbContext.Albums.FindAsync(id);
             if (album == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -90,12 +89,12 @@ namespace MusicStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _dbContext.Entry(album).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -106,7 +105,7 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await db.Albums.FindAsync(id);
+            Album album = await _dbContext.Albums.FindAsync(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -119,9 +118,9 @@ namespace MusicStore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Album album = await db.Albums.FindAsync(id);
-            db.Albums.Remove(album);
-            await db.SaveChangesAsync();
+            Album album = await _dbContext.Albums.FindAsync(id);
+            _dbContext.Albums.Remove(album);
+            await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +128,7 @@ namespace MusicStore.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _dbContext.Dispose();
             }
             base.Dispose(disposing);
         }

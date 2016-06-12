@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicStore.Models
 {
@@ -13,6 +14,8 @@ namespace MusicStore.Models
 
         public int AlbumId { get; set; }
         public int Count { get; set; }
+        [NotMapped]
+        public decimal Total { get { return Count * Album.Price; } }
 
         [DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
