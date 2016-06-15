@@ -31,6 +31,9 @@
                         </a>
                         @{ Html.RenderAction("GenreList", "Store", new { area = "" }); }
                     </li>
+                    <li>
+                        @{ Html.RenderAction("CartSummary", "ShoppingCart", new { area = "" }); }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -1,11 +1,11 @@
-﻿using MusicStore.Models;
+﻿using MusicStore.Core;
+using MusicStore.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
-using MusicStore.Core;
 
 namespace MusicStore.Controllers
 {
@@ -26,7 +26,6 @@ namespace MusicStore.Controllers
 
         public ActionResult Details(int albumId)
         {
-
             var album = _dbContext.Albums.FirstOrDefault(a => a.AlbumId == albumId);
             return View(album);
         }

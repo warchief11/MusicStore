@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MusicStore.Controllers
 {
+    [RequireHttps]
     public class HomeController : BaseController
     {
         public ActionResult Index()

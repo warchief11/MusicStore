@@ -1,16 +1,16 @@
-﻿using System;
+﻿using MusicStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using MusicStore.Models;
 
 namespace MusicStore.Migrations
 {
     internal partial class Configuration : DbMigrationsConfiguration<MusicStore.Models.MusicStoreContext>
     {
         public Configuration()
-        {  
-            AutomaticMigrationsEnabled = false;
+        {
+            AutomaticMigrationsEnabled = true;
         }
 
         private static readonly Random random = new Random();
@@ -213,7 +213,7 @@ namespace MusicStore.Migrations
             context.Albums.AddOrUpdate(new Album { Title = "Still Life", Genre = genres.Single(g => g.Name == "Metal"), Price = Price(), Artist = artists.Single(a => a.Name == "Opeth"), AlbumArtUrl = AlbumImg() });
             context.Albums.AddOrUpdate(new Album { Title = "Stop Making Sense", Genre = genres.Single(g => g.Name == "Rock"), Price = Price(), Artist = artists.Single(a => a.Name == "Talking Heads"), AlbumArtUrl = AlbumImg() });
             context.Albums.AddOrUpdate(new Album { Title = "Stranger than Fiction", Genre = genres.Single(g => g.Name == "Punk"), Price = Price(), Artist = artists.Single(a => a.Name == "Bad Religion"), AlbumArtUrl = AlbumImg() });
-            context.Albums.AddOrUpdate(new Album { Title = "Supermodified", Genre = genres.Single(g => g.Name == "Electronic"), Price = Price(), Artist = artists.Single(a => a.Name == "Amon Tobin"), AlbumArtUrl = AlbumImg() }); 
+            context.Albums.AddOrUpdate(new Album { Title = "Supermodified", Genre = genres.Single(g => g.Name == "Electronic"), Price = Price(), Artist = artists.Single(a => a.Name == "Amon Tobin"), AlbumArtUrl = AlbumImg() });
             context.Albums.AddOrUpdate(new Album { Title = "Switched-On Bach", Genre = genres.Single(g => g.Name == "Classical"), Price = Price(), Artist = artists.Single(a => a.Name == "Wendy Carlos"), AlbumArtUrl = AlbumImg() });
             context.Albums.AddOrUpdate(new Album { Title = "Symphony", Genre = genres.Single(g => g.Name == "Classical"), Price = Price(), Artist = artists.Single(a => a.Name == "Sarah Brightman"), AlbumArtUrl = AlbumImg() });
             context.Albums.AddOrUpdate(new Album { Title = "Ted Nugent", Genre = genres.Single(g => g.Name == "Rock"), Price = Price(), Artist = artists.Single(a => a.Name == "Ted Nugent"), AlbumArtUrl = AlbumImg() });
@@ -492,6 +492,7 @@ namespace MusicStore.Migrations
             context.SaveChanges();
             return genres;
         }
+
         //private static void AddOrders(MusicStoreEntities context)
         //{
         //    var now = DateTime.Now;

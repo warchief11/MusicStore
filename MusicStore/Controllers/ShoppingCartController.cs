@@ -10,7 +10,6 @@ namespace MusicStore.Controllers
 {
     public class ShoppingCartController : BaseController
     {
-        
         // GET: ShoppingCart
         public async Task<ActionResult> Index()
         {
@@ -28,14 +27,14 @@ namespace MusicStore.Controllers
 
         public async Task<ActionResult> AddToCart(int albumID)
         {
-           var album = _dbContext.Albums.FirstOrDefault(a => a.AlbumId == albumID);
+            var album = _dbContext.Albums.FirstOrDefault(a => a.AlbumId == albumID);
             await _shoppingCart.AddCartItem(album);
             await _dbContext.SaveChangesAsync();
             return Redirect(Request.UrlReferrer.PathAndQuery);
         }
 
         // GET: ShoppingCart
-        public ActionResult CartSummary()
+        public PartialViewResult CartSummary()
         {
             var viewModel = new ShoppingCartViewModel();
             viewModel.CartItems = _shoppingCart.GetCartItems();

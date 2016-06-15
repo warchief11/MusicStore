@@ -4,6 +4,6 @@
 <div id="cart-summary">
     @Html.Partial("_CartDetails")
 </div>
-<div class="btn btn-block">
-    <span>Checkout</span>
+<div class="btn btn-primary">
+    @Html.ActionLink("Checkout", "AddressAndPayment", "Checkout", null, null)
 </div>

@@ -10,8 +10,8 @@
         <div class="col-md-3">
             @Html.ActionLink(album.Title, "Details", new { albumID = album.AlbumId })
             <img src="@album.AlbumArtUrl" />
-            <h2>Album :   @album.Title</h2>
-             <h2> By :   @album.Artist.Name</h2>
+            <h5>Album :   @album.Title</h5>
+            <b> By :   @album.Artist.Name</b>
             @Html.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumId = album.AlbumId }, null)
         </div>
     }

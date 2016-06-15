@@ -1,5 +1,5 @@
 ﻿@model  IEnumerable<MusicStore.Models.Album>
-@{ 
+@{
     ViewBag.Title = "Home";
 }
 <div class="container">
@@ -16,7 +16,7 @@
                         <span>
                             <img alt=@album.Title src=@album.AlbumArtUrl />
                         </span>
-                        <h4>@album.Title</h4>
+                        <b>@album.Title</b>
                     </a>
                     @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
                 </li>
@@ -24,4 +24,3 @@
         </ul>
     </div>
 </div>
-
