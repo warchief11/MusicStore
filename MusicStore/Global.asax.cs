@@ -1,5 +1,5 @@
 ﻿using MusicStore.Models;
-using MusicStore.Models.Login;
+using MusicStore.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

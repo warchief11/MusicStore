@@ -17,7 +17,8 @@ namespace MusicStore.Controllers
         // GET: /Checkout/
         public ActionResult AddressAndPayment()
         {
-            return View();
+            var order = new Order();
+            return View(order);
         }
 
         //
@@ -26,6 +27,8 @@ namespace MusicStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddressAndPayment(Order order, CancellationToken requestAborted)
         {
+            order.ShippingAddress.UserId = HttpContext.User.Identity.Name;
+            order.Username = HttpContext.User.Identity.Name;
             if (!ModelState.IsValid)
             {
                 return View(order);
@@ -33,7 +36,6 @@ namespace MusicStore.Controllers
 
             try
             {
-                order.Username = HttpContext.User.Identity.Name;
                 order.OrderDate = DateTime.Now;
 
                 //Add the Order

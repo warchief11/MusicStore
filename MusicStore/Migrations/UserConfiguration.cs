@@ -1,5 +1,5 @@
 ﻿using MusicStore.Models;
-using MusicStore.Models.Login;
+using MusicStore.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MusicStore.Migrations
 {
-    internal partial class UserConfiguration : DbMigrationsConfiguration<MusicStore.Models.Login.AppDbContext>
+    internal partial class UserConfiguration : DbMigrationsConfiguration<MusicStore.Models.User.AppDbContext>
     {
         public UserConfiguration()
         {

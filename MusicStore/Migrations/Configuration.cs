@@ -11,6 +11,7 @@ namespace MusicStore.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         private static readonly Random random = new Random();

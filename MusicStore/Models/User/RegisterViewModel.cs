@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MusicStore.Models.Login
+namespace MusicStore.Models.User
 {
     public class RegisterViewModel
     {

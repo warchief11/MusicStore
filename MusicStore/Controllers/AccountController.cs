@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MusicStore.App_Start;
 using MusicStore.Core;
-using MusicStore.Models.Login;
+using MusicStore.Models.User;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;

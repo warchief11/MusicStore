@@ -11,13 +11,13 @@ namespace MusicStore.Controllers
     public class ShoppingCartController : BaseController
     {
         // GET: ShoppingCart
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            ShoppingCartViewModel viewModel = await GetShoppingCartVMAsync();
+            ShoppingCartViewModel viewModel = GetShoppingCartVMAsync();
             return View(viewModel);
         }
 
-        private async Task<ShoppingCartViewModel> GetShoppingCartVMAsync()
+        private ShoppingCartViewModel GetShoppingCartVMAsync()
         {
             var viewModel = new ShoppingCartViewModel();
             viewModel.CartItems = _shoppingCart.GetCartItems();
@@ -46,7 +46,7 @@ namespace MusicStore.Controllers
         {
             _shoppingCart.RemoveFromCart(cartItemId);
             await _dbContext.SaveChangesAsync();
-            var shoppingCartVM = await GetShoppingCartVMAsync();
+            var shoppingCartVM = GetShoppingCartVMAsync();
             return PartialView("_CartDetails", shoppingCartVM);
         }
     }

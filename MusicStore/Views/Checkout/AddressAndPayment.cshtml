@@ -4,13 +4,17 @@
     ViewBag.Title = "Address and Payment";
 }
 
-@using (Html.BeginForm("AddressAndPayment", "Checkout", FormMethod.Post))
+@using (Html.BeginForm("AddressAndPayment", "Checkout", FormMethod.Post, new { @class = "form form-horizontal" }))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
     <h2>Address and Payment</h2>
     <hr />
     <div class="input-group">
-        @Html.EditorForModel()
+        @Html.EditorFor(m => Model.ShippingAddress)
+    </div>
+    <div>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeHolder = "Email address" })
     </div>
     <div class="input-group">
         <h2>Payment Section</h2>

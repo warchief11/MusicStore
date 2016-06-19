@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using MusicStore.App_Start;
 using MusicStore.Models;
-using MusicStore.Models.Login;
+using MusicStore.Models.User;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Unity.Mvc5;

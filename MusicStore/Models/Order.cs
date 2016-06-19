@@ -1,5 +1,7 @@
+using MusicStore.Models.User;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicStore.Models
 {
@@ -16,40 +18,8 @@ namespace MusicStore.Models
         public string Username { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
-        [StringLength(160)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        [StringLength(160)]
-        public string LastName { get; set; }
-
-        [Required]
-        [StringLength(70, MinimumLength = 3)]
-        public string Address { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string City { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string State { get; set; }
-
-        [Required]
-        [Display(Name = "Postal Code")]
-        [StringLength(10, MinimumLength = 5)]
-        public string PostalCode { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string Country { get; set; }
-
-        [Required]
-        [StringLength(24)]
-        [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }
+        [NotMapped]
+        public Address ShippingAddress { get; set; }
 
         [Required]
         [Display(Name = "Email Address")]

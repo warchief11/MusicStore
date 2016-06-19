@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MusicStore.Models.Login
+namespace MusicStore.Models.User
 {
     public class AppDbContext : IdentityDbContext<AppUser>
     {

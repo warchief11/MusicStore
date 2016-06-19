@@ -225,6 +225,12 @@
     <Content Include="Content\Images\home-showcase.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\placeholder.gif" />
+    <Content Include="Content\Less\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -234,6 +240,11 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Less\Site.less" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -258,9 +269,10 @@
       <DependentUpon>201606111423092_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\UserConfiguration.cs" />
-    <Compile Include="Models\Login\AppDbContext.cs" />
-    <Compile Include="Models\Login\AppRole.cs" />
-    <Compile Include="Models\Login\AppUser.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\User\AppDbContext.cs" />
+    <Compile Include="Models\User\AppRole.cs" />
+    <Compile Include="Models\User\AppUser.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -276,16 +288,16 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\Login\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="Models\Login\ExternalLoginListViewModel.cs" />
-    <Compile Include="Models\Login\ManageViewModels.cs" />
-    <Compile Include="Models\Login\SendCodeViewModel.cs" />
-    <Compile Include="Models\Login\VerifyCodeViewModel.cs" />
-    <Compile Include="Models\Login\ForgotViewModel.cs" />
-    <Compile Include="Models\Login\ResetPasswordViewModel.cs" />
-    <Compile Include="Models\Login\ForgotPasswordViewModel.cs" />
-    <Compile Include="Models\Login\LoginViewModel.cs" />
-    <Compile Include="Models\Login\RegisterViewModel.cs" />
+    <Compile Include="Models\User\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\User\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\User\ManageViewModels.cs" />
+    <Compile Include="Models\User\SendCodeViewModel.cs" />
+    <Compile Include="Models\User\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\User\ForgotViewModel.cs" />
+    <Compile Include="Models\User\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\User\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\User\LoginViewModel.cs" />
+    <Compile Include="Models\User\RegisterViewModel.cs" />
     <Compile Include="Models\MusicStoreContext.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -341,6 +353,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -352,6 +365,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606050218426_InitialCreate.resx">
