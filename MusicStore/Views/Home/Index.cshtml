@@ -2,6 +2,19 @@
 @{
     ViewBag.Title = "Home";
 }
+
+@helper Truncate(string input, int length)
+{
+if (input.Length <= length)
+{
+        @input
+}
+else
+{
+        @input.Substring(0, length)<text>...</text>
+}
+}
+
 <div class="container">
     <div>This is the home page</div>
     <div>
@@ -11,14 +24,21 @@
         <ul class="row list-unstyled media-list">
             @foreach (var album in Model)
             {
-                <li class="col-lg-2 col-md-2 col-sm-2 col-xs-4 container">
-                    <a href="~/Store/Details?albumID=@album.AlbumId">
-                        <span>
-                            <img alt=@album.Title src=@album.AlbumArtUrl />
-                        </span>
-                        <b>@album.Title</b>
-                    </a>
-                    @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
+                <li class="album container">
+                    <div>
+                        <a href="~/Store/Details?albumID=@album.AlbumId">
+                            <span>
+                                <img alt=@album.Title src=@album.AlbumArtUrl />
+                            </span>
+
+                        </a>
+                    </div>
+                    <div>
+                        <b>@Truncate(album.Title,20)</b>
+                    </div>
+                    <div>
+                        @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
+                    </div>
                 </li>
             }
         </ul>
