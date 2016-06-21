@@ -3,7 +3,7 @@ using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MusicStore.Models.User
+namespace MusicStore.ViewModels.User
 {
     public class IndexViewModel
     {

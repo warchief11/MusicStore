@@ -1,10 +1,6 @@
-﻿using MusicStore.Models;
-using MusicStore.Models.User;
-using System;
-using System.Collections.Generic;
+﻿using MusicStore.DAL.Models;
+using MusicStore.DAL.Models.User;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -17,9 +13,11 @@ namespace MusicStore
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             UnityConfig.RegisterComponents();
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicStoreContext, Migrations.Configuration>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Migrations.UserConfiguration>());
-            using (var context = new MusicStoreContext())
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicStoreContext, DAL.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, DAL.Migrations.UserConfiguration>());
+
+            using (var context = new MusicStore.DAL.Models.MusicStoreContext())
             {
                 context.Database.Initialize(true);
             }
@@ -27,7 +25,7 @@ namespace MusicStore
             {
                 context.Database.Initialize(true);
             }
-            //Database.SetInitializer<MusicStore.Models.MusicStoreContext>(InitialCreate);
+            //Database.SetInitializer<MusicStore.DAL.Models.MusicStoreContext>(InitialCreate);
         }
     }
 }

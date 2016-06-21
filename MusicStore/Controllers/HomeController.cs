@@ -1,9 +1,8 @@
 ﻿using MusicStore.Core;
-using System;
-using System.Collections.Generic;
+using MusicStore.ViewModels;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MusicStore.Controllers
@@ -11,10 +10,14 @@ namespace MusicStore.Controllers
     [RequireHttps]
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var topSellingAlbums = _dbContext.Albums.Take(10).ToList();
-            return View(topSellingAlbums);
+            var viewModel = new HomePageViewModel();
+            viewModel.TopSellingAlbums = _dbContext.Albums.Take(10).ToList();
+            viewModel.FeaturedArtist = await _dbContext.Artists.FirstOrDefaultAsync(a => a.Name == "The Beatles");
+            viewModel.FeaturedAlbums = await _dbContext.Albums.Where(a => a.ArtistId == viewModel.FeaturedArtist.ArtistId).Take(8).ToListAsync();
+
+            return View(viewModel);
         }
     }
 }

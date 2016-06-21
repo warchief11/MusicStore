@@ -1,5 +1,5 @@
 ﻿using MusicStore.Core;
-using MusicStore.Models;
+using MusicStore.DAL.Models;
 using MusicStore.ViewModels;
 using System;
 using System.Linq;

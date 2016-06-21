@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MusicStore.App_Start;
-using MusicStore.Models.User;
+using MusicStore.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,18 +1,6 @@
-﻿@model  IEnumerable<MusicStore.Models.Album>
+﻿@model  MusicStore.ViewModels.HomePageViewModel
 @{
     ViewBag.Title = "Home";
-}
-
-@helper Truncate(string input, int length)
-{
-if (input.Length <= length)
-{
-        @input
-}
-else
-{
-        @input.Substring(0, length)<text>...</text>
-}
 }
 
 <div class="container">
@@ -21,26 +9,17 @@ else
         <img src="~/Content/Images/home-showcase.png" />
     </div>
     <div>
-        <ul class="row list-unstyled media-list">
-            @foreach (var album in Model)
-            {
-                <li class="album container">
-                    <div>
-                        <a href="~/Store/Details?albumID=@album.AlbumId">
-                            <span>
-                                <img alt=@album.Title src=@album.AlbumArtUrl />
-                            </span>
+        <h1>Featured Artist: @Model.FeaturedArtist.Name</h1>
+        <div>
+            @Html.DisplayFor(m => m.FeaturedAlbums, "AlbumList")
+        </div>
+        <hr />
+    </div>
 
-                        </a>
-                    </div>
-                    <div>
-                        <b>@Truncate(album.Title,20)</b>
-                    </div>
-                    <div>
-                        @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
-                    </div>
-                </li>
-            }
-        </ul>
+    <div>
+        <h1>Top Selling Albums:</h1>
+        <div>
+            @Html.DisplayFor(m => m.TopSellingAlbums, "AlbumList")
+        </div>
     </div>
 </div>

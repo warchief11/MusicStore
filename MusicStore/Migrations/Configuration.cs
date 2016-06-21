@@ -1,4 +1,4 @@
-﻿using MusicStore.Models;
+﻿using MusicStore.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MusicStore.Migrations
 {
-    internal partial class Configuration : DbMigrationsConfiguration<MusicStore.Models.MusicStoreContext>
+    internal partial class Configuration : DbMigrationsConfiguration<MusicStore.DAL.Models.MusicStoreContext>
     {
         public Configuration()
         {

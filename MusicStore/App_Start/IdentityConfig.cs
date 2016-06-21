@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using MusicStore.Models.User;
+using MusicStore.DAL.Models.User;
 using Owin;
 using System;
 using System.Security.Claims;

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MusicStore.Models.User
+namespace MusicStore.ViewModels.User
 {
     public class ForgotPasswordViewModel
     {

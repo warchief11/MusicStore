@@ -1,8 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace MusicStore.Models.User
+namespace MusicStore.ViewModels.User
 {
-    public class RegisterViewModel
+    public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
@@ -19,5 +23,7 @@ namespace MusicStore.Models.User
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Code { get; set; }
     }
 }

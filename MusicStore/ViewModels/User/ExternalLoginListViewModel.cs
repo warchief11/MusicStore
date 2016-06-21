@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MusicStore.Models.User
+namespace MusicStore.ViewModels.User
 {
     public class ExternalLoginListViewModel
     {

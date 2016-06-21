@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MusicStore.Models;
+using MusicStore.DAL.Models;
 using MusicStore.Core;
 
 namespace MusicStore.Areas.Admin.Controllers

@@ -1,9 +1,9 @@
-using MusicStore.Models.User;
+using MusicStore.DAL.Models.User;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MusicStore.Models
+namespace MusicStore.DAL.Models
 {
     //[Bind(Include = "FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email")]
     public class Order

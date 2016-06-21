@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MusicStore.DAL.Models.Album>
+
+<div>
+    <ul class="row list-unstyled media-list">
+        @foreach (var album in Model)
+            {
+            <li class="album-list container">
+                <div>
+                    <a href="~/Store/Details?albumID=@album.AlbumId">
+                        <span>
+                            <img alt=@album.Title src=@album.AlbumArtUrl />
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <b>@RazorHelper.Truncate(album.Title, 20)</b>
+                </div>
+                <div>
+                    @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = album.AlbumId }, null)
+                </div>
+            </li>
+        }
+    </ul>
+</div>

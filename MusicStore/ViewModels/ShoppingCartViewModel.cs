@@ -1,4 +1,4 @@
-﻿using MusicStore.Models;
+﻿using MusicStore.DAL.Models;
 using System.Collections.Generic;
 
 namespace MusicStore.ViewModels

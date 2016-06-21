@@ -1,18 +1,9 @@
-﻿@model MusicStore.Models.Genre
+﻿@model MusicStore.DAL.Models.Genre
 
 @{
     ViewBag.Title = "Genres";
 }
 <h2>Genre :  @Model.Name</h2>
 <div class="container">
-    @foreach (var album in Model.Albums)
-    {
-        <div class="col-md-3">
-            @Html.ActionLink(album.Title, "Details", new { albumID = album.AlbumId })
-            <img src="@album.AlbumArtUrl" />
-            <h5>Album :   @album.Title</h5>
-            <b> By :   @album.Artist.Name</b>
-            @Html.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumId = album.AlbumId }, null)
-        </div>
-    }
+    @Html.DisplayFor(m => m.Albums, "AlbumList")
 </div>

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MusicStore.Models
+namespace MusicStore.DAL.Models
 {
     public class CartItem
     {
