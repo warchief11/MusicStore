@@ -1,4 +1,5 @@
-﻿using MusicStore.DAL.Models;
+﻿using MusicStore.DAL;
+using MusicStore.DAL.Models;
 using System;
 using System.Web.Mvc;
 
@@ -6,13 +7,24 @@ namespace MusicStore.Core
 {
     public class BaseController : Controller
     {
-        protected MusicStoreContext _dbContext;
-        protected ShoppingCart _shoppingCart;
+        protected IMusicStoreContext _dbContext;
+        private ShoppingCart _shoppingCart;
 
+        protected ShoppingCart ShoppingCart
+        {
+            get
+            {
+                return _shoppingCart ?? ShoppingCart.GetCart(_dbContext, GetCartID());
+            }
+        }
         public BaseController()
         {
             _dbContext = new MusicStoreContext();
-            _shoppingCart = ShoppingCart.GetCart(_dbContext, GetCartID());
+        }
+
+        public BaseController(IMusicStoreContext dbContext)
+        {
+            _dbContext = dbContext;
         }
 
         private string GetCartID()

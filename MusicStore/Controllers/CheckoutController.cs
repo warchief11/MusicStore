@@ -39,9 +39,9 @@ namespace MusicStore.Controllers
                 order.OrderDate = DateTime.Now;
 
                 //Add the Order
-                _dbContext.Orders.Add(order);
+                _dbContext.Add(order);
 
-                await _shoppingCart.CreateOrder(order);
+                await ShoppingCart.CreateOrder(order);
 
                 // Save all changes
                 await _dbContext.SaveChangesAsync(requestAborted);
@@ -57,7 +57,7 @@ namespace MusicStore.Controllers
 
         public ActionResult Complete(int orderId)
         {
-            var order = _dbContext.Orders.Include(o => o.OrderDetails).FirstOrDefault();
+            var order = _dbContext.Query<Order>().Include(o => o.OrderDetails).FirstOrDefault();
             if (order == null)
             {
                 return View("Error");

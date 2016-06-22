@@ -20,15 +20,15 @@ namespace MusicStore.Controllers
         private ShoppingCartViewModel GetShoppingCartVMAsync()
         {
             var viewModel = new ShoppingCartViewModel();
-            viewModel.CartItems = _shoppingCart.GetCartItems();
-            viewModel.Total = _shoppingCart.GetTotal();
+            viewModel.CartItems = ShoppingCart.GetCartItems();
+            viewModel.Total = ShoppingCart.GetTotal();
             return viewModel;
         }
 
         public async Task<ActionResult> AddToCart(int albumID)
         {
-            var album = _dbContext.Albums.FirstOrDefault(a => a.AlbumId == albumID);
-            await _shoppingCart.AddCartItem(album);
+            var album = _dbContext.Query<Album>().FirstOrDefault(a => a.AlbumId == albumID);
+            await ShoppingCart.AddCartItem(album);
             await _dbContext.SaveChangesAsync();
             return Redirect(Request.UrlReferrer.PathAndQuery);
         }
@@ -37,14 +37,14 @@ namespace MusicStore.Controllers
         public PartialViewResult CartSummary()
         {
             var viewModel = new ShoppingCartViewModel();
-            viewModel.CartItems = _shoppingCart.GetCartItems();
-            viewModel.Total = _shoppingCart.GetTotal();
+            viewModel.CartItems = ShoppingCart.GetCartItems();
+            viewModel.Total = ShoppingCart.GetTotal();
             return PartialView("_CartSummary", viewModel);
         }
 
         public async Task<ActionResult> RemoveFromCart(int cartItemId)
         {
-            _shoppingCart.RemoveFromCart(cartItemId);
+            ShoppingCart.RemoveFromCart(cartItemId);
             await _dbContext.SaveChangesAsync();
             var shoppingCartVM = GetShoppingCartVMAsync();
             return PartialView("_CartDetails", shoppingCartVM);

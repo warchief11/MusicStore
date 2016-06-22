@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMusicStoreContext.cs" />
     <Compile Include="Migrations\201606050218426_InitialCreate.cs" />
     <Compile Include="Migrations\201606050218426_InitialCreate.Designer.cs">
       <DependentUpon>201606050218426_InitialCreate.cs</DependentUpon>

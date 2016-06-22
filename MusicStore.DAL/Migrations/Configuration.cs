@@ -494,7 +494,7 @@ namespace MusicStore.DAL.Migrations
             return genres;
         }
 
-        //private static void AddOrders(MusicStoreEntities context)
+        //private static void AddOrders(MusicStoreContext context)
         //{
         //    var now = DateTime.Now;
         //    for (var day = now - TimeSpan.FromDays(366); day < now; day += TimeSpan.FromDays(1))
@@ -502,7 +502,7 @@ namespace MusicStore.DAL.Migrations
         //        AddOrdersForDay(context, day);
         //    }
         //}
-        //private static void AddOrdersForDay(MusicStoreEntities context, DateTime day)
+        //private static void AddOrdersForDay(MusicStoreContext context, DateTime day)
         //{
         //    var ordersToMake = random.Next(3, 7);
         //    for (int i = 0; i < ordersToMake; i++)
@@ -511,7 +511,7 @@ namespace MusicStore.DAL.Migrations
         //    }
         //    context.SaveChanges();
         //}
-        //private static void AddFakeOrder(MusicStoreEntities context, DateTime day)
+        //private static void AddFakeOrder(MusicStoreContext context, DateTime day)
         //{
         //    var order = FakeO.Create.Fake<Order>(x => x.Address = FakeO.Address.StreetAddress(),
         //        x => x.City = FakeO.Address.City(),
@@ -529,7 +529,7 @@ namespace MusicStore.DAL.Migrations
         //    var details = AddFakeOrderDetails(context, order);
         //    order.Total = details.Sum(x => x.UnitPrice * x.Quantity);
         //}
-        //private static List<OrderDetail> AddFakeOrderDetails(MusicStoreEntities context, Order order)
+        //private static List<OrderDetail> AddFakeOrderDetails(MusicStoreContext context, Order order)
         //{
         //    var albumsInOrder = random.Next(1, 2);
         //    var details = FakeO.Create.Fake<OrderDetail>(albumsInOrder,

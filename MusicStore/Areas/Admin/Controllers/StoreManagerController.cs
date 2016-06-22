@@ -1,14 +1,14 @@
-﻿using System;
+﻿using MusicStore.Core;
+using MusicStore.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MusicStore.DAL.Models;
-using MusicStore.Core;
 
 namespace MusicStore.Areas.Admin.Controllers
 {
@@ -17,7 +17,7 @@ namespace MusicStore.Areas.Admin.Controllers
         // GET: StoreManager
         public async Task<ActionResult> Index()
         {
-            var albums = _dbContext.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            var albums = _dbContext.Query<Album>().Include(a => a.Artist).Include(a => a.Genre);
             return View(await albums.ToListAsync());
         }
 
@@ -28,7 +28,7 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await _dbContext.Albums.FindAsync(id);
+            Album album = await _dbContext.Query<Album>().FirstAsync(x => x.AlbumId  == id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -39,13 +39,13 @@ namespace MusicStore.Areas.Admin.Controllers
         // GET: StoreManager/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name");
-            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name");
+            ViewBag.ArtistId = new SelectList(_dbContext.Query<Artist>(), "ArtistId", "Name");
+            ViewBag.GenreId = new SelectList(_dbContext.Query<Genre>(), "GenreId", "Name");
             return View();
         }
 
         // POST: StoreManager/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -53,13 +53,13 @@ namespace MusicStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Albums.Add(album);
+                _dbContext.Add(album);
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Query<Artist>(), "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Query<Genre>(), "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -70,18 +70,18 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await _dbContext.Albums.FindAsync(id);
+            Album album = await _dbContext.Query<Album>().FirstOrDefaultAsync(x => x.AlbumId == id);
             if (album == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Query<Artist>(), "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Query<Genre>(), "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
         // POST: StoreManager/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,12 +89,12 @@ namespace MusicStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Entry(album).State = EntityState.Modified;
+                _dbContext.Update<Album>(album);
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(_dbContext.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(_dbContext.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_dbContext.Query<Artist>(), "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_dbContext.Query<Genre>(), "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -105,7 +105,7 @@ namespace MusicStore.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await _dbContext.Albums.FindAsync(id);
+            Album album = await _dbContext.Query<Album>().FirstOrDefaultAsync(x => x.AlbumId == id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace MusicStore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Album album = await _dbContext.Albums.FindAsync(id);
-            _dbContext.Albums.Remove(album);
+            Album album = await _dbContext.Query<Album>().FirstOrDefaultAsync(x => x.AlbumId == id);
+            _dbContext.Remove(album);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }

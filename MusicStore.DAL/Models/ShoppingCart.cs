@@ -8,23 +8,23 @@ namespace MusicStore.DAL.Models
 {
     public class ShoppingCart
     {
-        private readonly MusicStoreContext _dbContext;
+        private readonly IMusicStoreContext _dbContext;
         private readonly string _shoppingCartId;
 
-        private ShoppingCart(MusicStoreContext dbContext, string id)
+        private ShoppingCart(IMusicStoreContext dbContext, string id)
         {
             _dbContext = dbContext;
             _shoppingCartId = id;
         }
 
-        public static ShoppingCart GetCart(MusicStoreContext dbContext, string shoppingCartId)
+        public static ShoppingCart GetCart(IMusicStoreContext dbContext, string shoppingCartId)
         {
             return new ShoppingCart(dbContext, shoppingCartId);
         }
 
         public async Task AddCartItem(Album album)
         {
-            var cartItem = await _dbContext.CartItems.FirstOrDefaultAsync(c => c.AlbumId == album.AlbumId
+            var cartItem = await _dbContext.Query<CartItem>().FirstOrDefaultAsync(c => c.AlbumId == album.AlbumId
                                                      && c.CartId == _shoppingCartId);
 
             if (cartItem == null)
@@ -37,7 +37,7 @@ namespace MusicStore.DAL.Models
                     Album = album,
                     DateCreated = DateTime.Today
                 };
-                _dbContext.CartItems.Add(cartItem);
+                _dbContext.Add(cartItem);
             }
             cartItem.Count++;
         }
@@ -45,7 +45,7 @@ namespace MusicStore.DAL.Models
         public int RemoveFromCart(int id)
         {
             // Get the cart
-            var cartItem = _dbContext.CartItems.SingleOrDefault(
+            var cartItem = _dbContext.Query<CartItem>().SingleOrDefault(
                 cart => cart.CartId == _shoppingCartId
                 && cart.CartItemId == id);
 
@@ -60,7 +60,7 @@ namespace MusicStore.DAL.Models
                 }
                 else
                 {
-                    _dbContext.CartItems.Remove(cartItem);
+                    _dbContext.Remove(cartItem);
                 }
             }
 
@@ -69,17 +69,16 @@ namespace MusicStore.DAL.Models
 
         public async Task EmptyCart()
         {
-            var cartItems = await _dbContext
-                .CartItems
+            var cartItems = await _dbContext.Query<CartItem>()
                 .Where(cart => cart.CartId == _shoppingCartId)
                 .ToArrayAsync();
 
-            _dbContext.CartItems.RemoveRange(cartItems);
+            _dbContext.RemoveRange(cartItems);
         }
 
         public List<CartItem> GetCartItems()
         {
-            return _dbContext.CartItems.
+            return _dbContext.Query<CartItem>().
                 Where(cart => cart.CartId == _shoppingCartId).
                 Include(c => c.Album).
                 ToList();
@@ -89,7 +88,7 @@ namespace MusicStore.DAL.Models
         {
             // Get the count of each item in the cart and sum them up
             return _dbContext
-                .CartItems
+                .Query<CartItem>()
                 .Where(c => c.CartId == _shoppingCartId)
                 .Select(c => c.Count)
                 .SumAsync();
@@ -100,7 +99,7 @@ namespace MusicStore.DAL.Models
             // Multiply album price by count of that album to get
             // the current price for each of those albums in the cart
             // sum all album price totals to get the cart total
-            var items = _dbContext.CartItems
+            var items = _dbContext.Query<CartItem>()
                                         .Include(c => c.Album)
                                         .Where(c => c.CartId == _shoppingCartId)
                                         .Select(c => c.Count * c.Album.Price)
@@ -125,7 +124,7 @@ namespace MusicStore.DAL.Models
             foreach (var item in cartItems)
             {
                 //var album = _db.Albums.Find(item.AlbumId);
-                var album = await _dbContext.Albums.SingleAsync(a => a.AlbumId == item.AlbumId);
+                var album = await _dbContext.Query<Album>().SingleAsync(a => a.AlbumId == item.AlbumId);
 
                 var orderDetail = new OrderDetail
                 {
@@ -138,7 +137,7 @@ namespace MusicStore.DAL.Models
                 // Set the order total of the shopping cart
                 orderTotal += (item.Count * album.Price);
 
-                _dbContext.OrderDetails.Add(orderDetail);
+                _dbContext.Add(orderDetail);
             }
 
             // Set the order's total to the orderTotal count
