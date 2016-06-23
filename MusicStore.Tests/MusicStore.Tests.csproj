@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="MockData\FakeDBSet.cs" />
     <Compile Include="MockData\FakeMusicStoreContext.cs" />
     <Compile Include="MockData\MusicStoreTestData.cs" />
     <Compile Include="UnitTest1.cs" />

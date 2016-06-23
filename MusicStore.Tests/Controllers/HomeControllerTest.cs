@@ -48,17 +48,19 @@ namespace MusicStore.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task TestMethod1()
+        public async Task HomePageReturnsValidViewModel()
         {
             //arrange
-            var contextMockUp = new Mock<IMusicStoreContext>();
-            contextMockUp.Setup(x => x.Query<Album>()).Returns(MusicStoreTestData.Albums.Take(10).AsQueryable());
-            contextMockUp.Setup(x => x.Query<Artist>()).Returns(MusicStoreTestData.Artists.Take(5).AsQueryable());
+            var fakeDB = new FakeMusicStoreContext();
+            fakeDB.AddSet(MusicStoreTestData.Albums);
+            fakeDB.AddSet(MusicStoreTestData.Artists);
+            fakeDB.AddSet(MusicStoreTestData.Genres);
+
             var context = new Mock<HttpContextBase>();
             var session = new Mock<HttpSessionStateBase>();
             context.Setup(x => x.Session).Returns(session.Object);
             var requestContext = new RequestContext(context.Object, new RouteData());
-            var controller = new HomeController(contextMockUp.Object);
+            var controller = new HomeController(fakeDB);
             controller.ControllerContext = new ControllerContext(requestContext, controller);
             //act
             var result = (await controller.Index()) as ViewResult;
