@@ -12,7 +12,7 @@ namespace MusicStore
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            UnityConfig.RegisterComponents();
+            UnityConfig.BuildUnityContainer();
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicStoreContext, DAL.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, DAL.Migrations.UserConfiguration>());

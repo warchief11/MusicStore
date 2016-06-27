@@ -5,6 +5,9 @@ namespace MusicStore.ViewModels.User
     public class LoginViewModel
     {
         [Required]
+        public string Id { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }

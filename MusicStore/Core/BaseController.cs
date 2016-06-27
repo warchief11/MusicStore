@@ -1,4 +1,5 @@
-﻿using MusicStore.DAL;
+﻿using Microsoft.AspNet.Identity;
+using MusicStore.DAL;
 using MusicStore.DAL.Models;
 using System;
 using System.Web.Mvc;
@@ -45,6 +46,14 @@ namespace MusicStore.Core
                 return Redirect(returnUrl);
             }
             return RedirectToHome();
+        }
+
+        protected void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
         public ActionResult RedirectToHome()

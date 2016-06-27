@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using MusicStore.DAL.Models.User;
@@ -37,14 +38,17 @@ namespace MusicStore.App_Start
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.Use(async (context, next) =>
+            {
+                await next.Invoke();
+            });
+            //// Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
+            //app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
 
-            // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
-            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
-
-            // Enables the application to remember the second login verification factor such as phone or email.
-            // Once you check this option, your second step of verification during the login process will be remembered on the device where you logged in from.
-            // This is similar to the RememberMe option when you log in.
-            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+            //// Enables the application to remember the second login verification factor such as phone or email.
+            //// Once you check this option, your second step of verification during the login process will be remembered on the device where you logged in from.
+            //// This is similar to the RememberMe option when you log in.
+            //app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -59,13 +63,19 @@ namespace MusicStore.App_Start
             //   appId: "",
             //   appSecret: "");
 
+            //var cookieOptions = new CookieAuthenticationOptions
+            //{
+            //    LoginPath = new PathString("/Login/Login")
+            //};
+            //app.UseCookieAuthentication(cookieOptions);
+            //app.SetDefaultSignInAsAuthenticationType(cookieOptions.AuthenticationType);
             var options = new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "766402978744-fg0f8rgrbriglf2i9tq6mjakicoh3csa.apps.googleusercontent.com",
                 ClientSecret = "BcKqVd7aH7tp9iLIT1JDnijn",
-                CallbackPath = new PathString("/Account/ExternalLoginCallback")
+                //CallbackPath = new PathString("/Account/ExternalLoginCallback")
             };
-            options.Scope.Add("https://www.googleapis.com/auth/books");
+            //options.Scope.Add("https://www.googleapis.com/auth/books");
             app.UseGoogleAuthentication(options);
         }
     }

@@ -23,9 +23,9 @@ namespace MusicStore.Controllers
         public async Task<ActionResult> Index()
         {
             var viewModel = new HomePageViewModel();
-            viewModel.TopSellingAlbums = _dbContext.Query<Album>().Take(10).ToList();
+            viewModel.TopSellingAlbums = _dbContext.Query<Album>().Take(5).ToList();
             viewModel.FeaturedArtist = await _dbContext.Query<Artist>().FirstOrDefaultAsync(a => a.Name == "The Beatles");
-            viewModel.FeaturedAlbums = await _dbContext.Query<Album>().Where(a => a.ArtistId == viewModel.FeaturedArtist.ArtistId).Take(8).ToListAsync();
+            viewModel.FeaturedAlbums = await _dbContext.Query<Album>().Where(a => a.ArtistId == viewModel.FeaturedArtist.ArtistId).Take(5).ToListAsync();
 
             return View(viewModel);
         }

@@ -1,14 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MusicStore.Controllers;
-using MusicStore.DAL;
-using MusicStore.DAL.Models;
 using MusicStore.Tests.MockData;
 using MusicStore.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;

@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using MusicStore.App_Start;
+using MusicStore.DAL;
 using MusicStore.DAL.Models;
 using MusicStore.DAL.Models.User;
 using System.Data.Entity;
@@ -12,10 +13,11 @@ namespace MusicStore
 {
     public static class UnityConfig
     {
-        public static void RegisterComponents()
+        public static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
 
+            container.RegisterType<IMusicStoreContext, MusicStoreContext>(new HierarchicalLifetimeManager());
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
@@ -27,6 +29,7 @@ namespace MusicStore
             //container.RegisterType<AppUserManager>(new HierarchicalLifetimeManager());
             //container.RegisterType<AppSignInManager>(new HierarchicalLifetimeManager());
             //container.RegisterType<IUserStore<AppUser>, UserStore<AppUser>>(new HierarchicalLifetimeManager());
+            return container;
         }
     }
 }

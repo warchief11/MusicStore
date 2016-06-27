@@ -426,13 +426,7 @@ namespace MusicStore.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
+       
 
         internal class ChallengeResult : HttpUnauthorizedResult
         {
