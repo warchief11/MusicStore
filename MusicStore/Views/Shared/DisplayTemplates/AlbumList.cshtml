@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MusicStore.DAL.Models.Album>
 
 <div>
-    <ul class="row list-unstyled media-list">
+    <ul class="row album-list list-unstyled ">
         @foreach (var album in Model)
             {
-            <li class="album-list container">
+            <li class="album-list">
                 <div>
                     <a href="~/Store/Details?albumID=@album.AlbumId">
                         <span>

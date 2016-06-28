@@ -17,13 +17,10 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a class="btn" type="button" data-toggle="modal" href=@Url.Action("Register", "Account")>Register</a>
-            @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
         </li>
         <li>
-            @Ajax.ActionLink("Register", "Login", "Account", new AjaxOptions { AllowCache = false }, new { @class = "btn", @type = "button", @data_toggle = "modal" })
-            <a class="btn" type="button" data-toggle="modal" href=@Url.Action("Login", "Account")>Login</a>
-            @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
         </li>
      
     </ul>
