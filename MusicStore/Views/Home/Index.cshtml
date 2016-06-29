@@ -18,8 +18,10 @@
 
     <div>
         <h1>Top Selling Albums:</h1>
+        @Html.Partial("CarouselList", Model.TopSellingAlbums)
         <div>
-            @Html.DisplayFor(m => m.TopSellingAlbums, "AlbumList")
+            
+
         </div>
     </div>
 </div>
