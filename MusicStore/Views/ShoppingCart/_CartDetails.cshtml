@@ -24,13 +24,21 @@
                     @cartItem.Count
                 </td>
                 <td>
-                    @Ajax.ActionLink("Remove Item", "RemoveFromCart", "ShoppingCart", new { cartItemID = cartItem.CartItemId }, new AjaxOptions { UpdateTargetId = "cart-summary", InsertionMode = InsertionMode.Replace })
+                    @Ajax.ActionLink("Remove Item", "RemoveFromCart", "ShoppingCart",
+                                new { cartItemID = cartItem.CartItemId },
+                                new AjaxOptions { UpdateTargetId = "cart-summary", InsertionMode = InsertionMode.Replace },
+                                new { @class="btn btn-sm"})
                 </td>
+
+
                 <td>
                     @(cartItem.Album.Price * cartItem.Count)
                 </td>
             </tr>
         }
+        <tfoot>
+
+        </tfoot>
     </table>
     <div class="grid-footer">
         Subtotal: <span data-format="c">@Model.Total</span>

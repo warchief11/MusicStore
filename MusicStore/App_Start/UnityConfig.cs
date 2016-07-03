@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Practices.Unity;
-using MusicStore.App_Start;
+﻿using Microsoft.Practices.Unity;
 using MusicStore.DAL;
 using MusicStore.DAL.Models;
-using MusicStore.DAL.Models.User;
-using System.Data.Entity;
 using System.Web.Mvc;
 using Unity.Mvc5;
 

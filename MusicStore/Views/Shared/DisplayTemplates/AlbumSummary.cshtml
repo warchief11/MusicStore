@@ -1,0 +1,16 @@
+﻿@model MusicStore.DAL.Models.Album
+
+
+<div>
+    <a href="~/Store/Details?albumID=Model.AlbumId">
+        <span>
+            <img alt=Model.Title src=Model.AlbumArtUrl />
+        </span>
+    </a>
+</div>
+<div>
+    <b>@RazorHelper.Truncate(Model.Title, 20)</b>
+</div>
+<div>
+    @Ajax.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { albumID = Model.AlbumId }, null)
+</div>

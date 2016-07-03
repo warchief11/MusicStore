@@ -2,13 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using MusicStore.DAL.Models;
 using System.Threading;
-using System.Collections;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
 
 namespace MusicStore.Tests.MockData
 {

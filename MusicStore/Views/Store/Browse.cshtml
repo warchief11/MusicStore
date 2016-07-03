@@ -4,6 +4,4 @@
     ViewBag.Title = "Genres";
 }
 <h2>Genre :  @Model.Name</h2>
-<div class="container">
-    @Html.DisplayFor(m => m.Albums, "AlbumList")
-</div>
+    @Html.Partial("AlbumList", Model.Albums)

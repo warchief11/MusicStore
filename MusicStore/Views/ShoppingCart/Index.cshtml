@@ -2,7 +2,45 @@
 
 <h2>Shopping Cart</h2>
 <div id="cart-summary">
-    @Html.Partial("_CartDetails")
+    <div class="table">
+        <table class="table table-bordered table-responsive table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Remove</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MusicStore.DAL.Models.CartItem cartItem in Model.CartItems)
+            {
+                    <tr>
+                        <td data-th="Item">
+                            @Html.ActionLink(cartItem.Album.Title, "Details", "Store", new { albumId = cartItem.AlbumId }, null)
+                        </td>
+                        <td data-th="Price">
+                            <span data-format="C">@cartItem.Album.Price</span>
+                        </td>
+                        <td data-th="Quantity">
+                            <input type="number" value="@cartItem.Count"/>
+                        </td>
+                        <td data-th="Remove">
+                            @Ajax.ActionLink("Remove Item", "RemoveFromCart", "ShoppingCart", new { cartItemID = cartItem.CartItemId }, new AjaxOptions { UpdateTargetId = "cart-summary", InsertionMode = InsertionMode.Replace })
+                        </td>
+                        <td data-th="Total">
+                            @(cartItem.Album.Price * cartItem.Count)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="grid-footer">
+            Subtotal: <span data-format="c">@Model.Total</span>
+        </div>
+    </div>
+
 </div>
 <div class="btn btn-primary">
     @Html.ActionLink("Checkout", "AddressAndPayment", "Checkout", null, null)

@@ -1,16 +1,12 @@
 ﻿using MusicStore.DAL.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicStore.Tests.MockData
 {
 
-  
+
     class MusicStoreTestData
     {
         public static IQueryable<Album> Albums

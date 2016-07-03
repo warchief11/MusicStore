@@ -356,6 +356,7 @@
     <Content Include="Views\Shared\DisplayTemplates\AlbumList.cshtml" />
     <Content Include="Views\Shared\CarouselList.cshtml" />
     <Content Include="Views\Shared\AlbumList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AlbumSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

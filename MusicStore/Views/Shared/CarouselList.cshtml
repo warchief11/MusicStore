@@ -1,35 +1,49 @@
 ﻿@model IEnumerable<MusicStore.DAL.Models.Album>
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-                <h3>
-                    Carousel Product Cart Slider
-                </h3>
-            </div>
-            <div class="col-md-3">
-                <!-- Controls -->
-                <div class="controls pull-right hidden-xs">
-                    <a class="left fa fa-chevron-left btn btn-success" href="#my-carousel-id"
-                       data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#my-carousel-id"
-                                                data-slide="next"></a>
-                </div>
-            </div>
-        </div>
+
+<!-- Controls -->
+<div class="row">
+    @*<div class="col-md-8">
+        <p>Album List</p>
+    </div>*@
+
+</div>
+<div class="row">
+    <div class="col-md-12">
         <div id="my-carousel-id" class="carousel slide hidden-xs" data-ride="carousel">
             <!-- Wrapper for slides -->
-            <div class="carousel-inner">
+            <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <div class="row">
+                    <div class="row album-carousel">
                         @Html.Partial("AlbumList", Model.Take(5).ToList())
                     </div>
                 </div>
-                <div class="item">
-                    <div class="row">
-                        @Html.Partial("AlbumList", Model.Skip(5).Take(5).ToList())
-                    </div>
-                </div>
+                @{
+                    var nextSlides = Model;
+                    while (nextSlides.Any())
+                    {
+                        nextSlides = nextSlides.Skip(5).ToList();
+                        if (nextSlides.Any())
+                        {
+                            <div class="item">
+                                <div class="row album-carousel">
+                                    @Html.Partial("AlbumList", nextSlides.Take(5))
+                                </div>
+                            </div>
+                        }
+                    }
+                }
             </div>
+
+                <a class="carousel-control left" href="#my-carousel-id"
+                   data-slide="prev" data-toggle="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control right" href="#my-carousel-id"
+                   data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
         </div>
     </div>
 </div>

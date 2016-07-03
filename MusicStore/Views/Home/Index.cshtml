@@ -3,25 +3,24 @@
     ViewBag.Title = "Home";
 }
 
-<div class="container">
+<div class="row">
     <div>This is the home page</div>
     <div>
         <img src="~/Content/Images/home-showcase.png" />
     </div>
-    <div>
-        <h1>Featured Artist: @Model.FeaturedArtist.Name</h1>
-        <div>
-            @Html.DisplayFor(m => m.FeaturedAlbums, "AlbumList")
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="h3 pull-left">Featured Artist: @Model.FeaturedArtist.Name</p>
+        @Html.Partial("CarouselList", Model.FeaturedAlbums , ViewData)
         <hr />
     </div>
-
-    <div>
-        <h1>Top Selling Albums:</h1>
+</div>
+<div class="row">
+    <p class="h2">Top Selling Albums:</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
         @Html.Partial("CarouselList", Model.TopSellingAlbums)
-        <div>
-            
-
-        </div>
     </div>
 </div>
