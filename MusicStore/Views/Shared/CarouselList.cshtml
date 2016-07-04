@@ -2,10 +2,21 @@
 
 <!-- Controls -->
 <div class="row">
-    @*<div class="col-md-8">
-        <p>Album List</p>
-    </div>*@
-
+    <div class="col-md-8 ">
+        <p class="h3 pull-left">@ViewData["CarouselText"]</p>
+    </div>
+    <div class="col-md-4 carousel-navigator">
+        <a class="btn  btn-primary left" href="#my-carousel-id"
+           data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class= "btn btn-primary right" href="#my-carousel-id"
+           data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -32,18 +43,16 @@
                         }
                     }
                 }
-            </div>
-
-                <a class="carousel-control left" href="#my-carousel-id"
-                   data-slide="prev" data-toggle="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control right" href="#my-carousel-id"
-                   data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            </div>          
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $(".carousel-navigator a").on("click", function (e) {
+            e.preventDefault();
+            $("#my-carousel-id").carousel("prev");
+        });
+
+    }); //End Document ready
+</script>

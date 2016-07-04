@@ -160,11 +160,8 @@ body #wrapper {
 body #my-carousel-id .album-carousel {
   margin: 0px 0px 0px 15px;
 }
-body .my-carousel-navigate {
-  padding: 20px 0px 0px 0px;
-}
-body .album-list {
-  display: inline-flex;
+body .carousel-navigator {
+  padding: 15px 0px 0px 0px;
 }
 body .album-list li {
   display: inline;
